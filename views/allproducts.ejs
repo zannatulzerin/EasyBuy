@@ -1,0 +1,21 @@
+<h1 class="pb-4">All products</h1>
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  <% if(products != '') { %> <% products.forEach(function(productItem, index){
+  %>
+  <a
+    href="/product/<%= productItem._id %>"
+    class="col text-center category_link"
+  >
+    <div class="category_img category_img--large shadow">
+      <img
+        src="/uploads/<%= productItem.image %>"
+        alt="<%= productItem.name %>"
+      />
+    </div>
+    <div class="pt-1"><%= productItem.name %></div>
+  </a>
+  <% }) %> <% } else { %>
+  <p>No items found.</p>
+  <% } %>
+</div>

@@ -1,0 +1,30 @@
+<div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
+  <div>
+    <h1 class="display-5 fw-bold mb-3">Different collections of goodies</h1>
+  </div>
+</div>
+
+<section class="pb-4 pt-4">
+  <div class="d-flex mb-2 align-items-center">
+    <h2>All products</h2>
+    <a href="/allproducts" class="ms-auto">View More</a>
+  </div>
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <% if(food !='' ) { %> <% food.latest.forEach(function(product, index){ %>
+    <a href="/product/<%= product._id %>" class="col text-center category_link">
+      <div class="category_img--large shadow">
+        <img
+          src="/uploads/<%= product.image %>"
+          alt="<%= product.name %>"
+          loading="lazy"
+        />
+      </div>
+      <div class="pt-1">
+        <h5><%= product.name %></h5>
+      </div>
+    </a>
+    <% }) %> <% } else { %>
+    <p>No items found.</p>
+    <% } %>
+  </div>
+</section>
