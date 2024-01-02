@@ -6,6 +6,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
 //home
+//to sort products in homepage by retrieving all products
 exports.homepage = async (req, res) => {
   try {
     let userId = await req.session.userId;
@@ -22,6 +23,7 @@ exports.homepage = async (req, res) => {
 };
 
 //get a product
+//details of products
 exports.exploreProducts = async (req, res) => {
   try {
     let productId = req.params.id;
@@ -43,6 +45,7 @@ exports.allProducts = async (req, res) => {
   }
 };
 
+//
 exports.submitProduct = async (req, res) => {
   try {
     const infoErrorsObj = req.flash('infoErrors');
@@ -105,7 +108,6 @@ exports.submitProductPost = async (req, res) => {
 };
 
 const { v4: uuidv4 } = require('uuid');
-
 exports.signupPost = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -292,7 +294,6 @@ const sendResetPasswordEmail = async (userEmail, resetToken) => {
     subject: 'Password Reset Request',
     text: `Token:\n` + `${resetToken}\n\n`,
   };
-
   await transporter.sendMail(mailOptions);
 };
 

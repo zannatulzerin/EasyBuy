@@ -1,41 +1,37 @@
 <h1>Product details</h1>
-<% if(product !==null ) {%>
+<% if(product !== null) { %>
 
-<div class="row">
-  <div class="col-12 col-md-4">
+<div>
+  <div>
     <img
       src="/uploads/<%- product.image %>"
-      style="top: 20px"
       alt="<%- product.image %>"
-      class="img-fluid sticky-top"
       loading="lazy"
     />
   </div>
 
-  <div class="col-12 col-md-8">
-    <div class="row">
-      <div class="col-12">
-        <h1><%= product.name %></h1>
-      </div>
-      <div class="col-12 mb-4">
-        <i class="bi bi-tag"></i>
-        <%- product.category %>
-        <br />
-        <br />
-        <%- product.description %>
-      </div>
-      <div class="col-12">
-        <h4>Price</h4>
-        <%- product.price %>
-      </div>
-      <div class="col-12" style="white-space: pre-line">
-        <h4>Count in stock</h4>
-        <%- product.countInStock %>
-      </div>
+  <div>
+    <div>
+      <h1><%= product.name %></h1>
+    </div>
+    <div>
+      <i></i>
+      <%- product.category %>
+      <br />
+      <br />
+      <%- product.description %>
+    </div>
+    <div>
+      <h4>Price</h4>
+      <%- product.price %>
+    </div>
+    <div style="white-space: pre-line">
+      <h4>Count in stock</h4>
+      <%- product.countInStock %>
     </div>
     <br /><br />
   </div>
 </div>
-<% } else{ %>
+<% } else { %>
 <p>No Items Found</p>
 <% } %>

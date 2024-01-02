@@ -2,16 +2,16 @@
 
 ## Features
 
-1. Users can Signup/Login with email and password.
-2. Users can Signup/Login with Google Authentication.
-3. Users can share their recipies including it's Name, Ingredients, Description, Instruction, category and picture.
-4. Users can see other posts.
-5. Users can edit and delete their own recipes.
-6. Users can set a new password if they forget there old one.
+1. Sellers can signup/login with email and password.
+2. Sellers can signup with Google account.
+3. Sellers can share their products with their name, description, price, count in stock, category and image.
+4. Sellers can see other products from all sellers.
+5. Sellers can edit and delete their products from website.
+6. Sellers can reset their password in case of if they forget password.
 
 ## Technology used
 
-Node.js, Express JS, Ejs and MongoDB
+Node JS, Express JS, EJS and MongoDB
 
 ## Setup
 

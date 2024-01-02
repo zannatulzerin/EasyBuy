@@ -1,234 +1,137 @@
-<div class="section about-section gray-bg" id="about">
-  <div class="container">
-    <div class="row align-items-center flex-row-reverse">
-      <div class="">
-        <div class="about-text go-to">
-          <h3 class=""><%= user.name %></h3>
+<div>
+  <h1><%= user.name %></h1>
 
-          <div class="row about-list">
-            <div class="col-lg-6">
-              <div>
-                <label>Name</label>
-                <p><%= user.name %></p>
+  <div>
+    <div>
+      <label>Name</label>
+      <p><%= user.name %></p>
+    </div>
+  </div>
+
+  <div id="mtable" style="display: block">
+    <div id="Grid">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Product</th>
+            <th scope="col">Item</th>
+            <th scope="col">Category</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if(product !='' ) { %> <% product.forEach(function(item,index){ %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td>
+              <img
+                src="/uploads/<%- item.image %>"
+                alt=""
+                width="70"
+                height="70"
+              />
+            </td>
+            <td><%= item.name %></td>
+            <td><%= item.category %></td>
+
+            <td>
+              <button type="button" onclick="openEditModal('<%= item._id %>')">
+                Edit
+              </button>
+
+              <button type="submit" onclick="removeList('<%= item._id %>')">
+                Remove
+              </button>
+
+              <div id="editModal-<%= item._id %>" style="display: none">
+                <div>
+                  <h5>Edit product</h5>
+                  <button
+                    type="button"
+                    onclick="closeEditModal('<%= item._id %>')"
+                  >
+                    Close
+                  </button>
+                </div>
+                <div>
+                  <form
+                    action="/editList/<%= item._id %>"
+                    method="post"
+                    enctype="multipart/form-data"
+                  >
+                    <div>
+                      <label for="name">Product</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value="<%= item.name %>"
+                        autocomplete="off"
+                      />
+                    </div>
+
+                    <div>
+                      <label for="description">Description</label>
+                      <textarea
+                        name="description"
+                        placeholder="<%= item.description %>"
+                        autocomplete="off"
+                      ></textarea>
+                    </div>
+
+                    <div>
+                      <label for="ingredients">Ingredients</label>
+                      <input
+                        type="text"
+                        name="ingredients"
+                        value="<%= item.ingredients%>"
+                        autocomplete="off"
+                      />
+                    </div>
+
+                    <div>
+                      <label for="instructions">Instructions</label>
+                      <textarea
+                        placeholder="<%= item.instructions %>"
+                        name="instructions"
+                      ></textarea>
+                    </div>
+
+                    <div>
+                      <label for="category">Category</label>
+                      <select name="category" value="<%= item.category %>">
+                        <option selected><%= item.category %></option>
+                        <option value="Thai">Thai</option>
+                        <option value="American">American</option>
+                        <option value="Chineese">Chineese</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Italian">Italian</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label for="image">Image</label>
+                      <img
+                        src="/uploads/<%= item.image %>"
+                        alt="image"
+                        width="80"
+                        height="80"
+                      />
+                      <input type="file" name="image" accept="image/*" />
+                    </div>
+
+                    <div>
+                      <button type="submit" id="editsubmit">Save</button>
+                    </div>
+                  </form>
+                </div>
               </div>
-            </div>
-
-            <div class="col-md-6">
-              <div>
-                <label>E-mail</label>
-                <p><%= user.email %></p>
-              </div>
-            </div>
-            <div id="mtable" style="display: block">
-              <div id="Grid">
-                <table class="table mt-5">
-                  <thead>
-                    <tr>
-                      <th scope="col">S.No</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Item</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% if(product !='' ) { %> <%
-                    product.forEach(function(item,index){ %>
-                    <tr>
-                      <td><%= index+1 %></td>
-                      <td>
-                        <img
-                          style="width: 70px; height: 70px"
-                          src="/uploads/<%- item.image %>"
-                          alt=""
-                        />
-                      </td>
-                      <td><%= item.name %></td>
-                      <td><%= item.category %></td>
-
-                      <td>
-                        <button
-                          type="button"
-                          class="btn btn-success"
-                          onclick="openEditModal('<%= item._id %>')"
-                        >
-                          Edit
-                        </button>
-
-                        <button
-                          type="submit"
-                          class="btn btn-danger"
-                          onclick="removeList('<%= item._id %>')"
-                        >
-                          Remove
-                        </button>
-
-                        <div
-                          class="modal"
-                          id="editModal-<%= item._id %>"
-                          tabindex="-1"
-                          role="dialog"
-                          aria-labelledby="editModallabel"
-                          aria-hidden="true"
-                          style="display: none"
-                        >
-                          <div
-                            class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
-                          >
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="editModallabel">
-                                  Edit product
-                                </h5>
-                                <button
-                                  type="button"
-                                  class="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
-                              <div class="modal-body" id="modaleditbody">
-                                <div class="row justify-content-center">
-                                  <form
-                                    action="/editList/<%= item._id %>"
-                                    method="post"
-                                    enctype="multipart/form-data"
-                                  >
-                                    <div class="row g-3">
-                                      <div class="col-6">
-                                        <label for="name" class="form-label"
-                                          >Product</label
-                                        >
-                                        <input
-                                          type="text"
-                                          name="name"
-                                          id="name"
-                                          class="form-control"
-                                          value="<%= item.name %>"
-                                          autocomplete="off"
-                                        />
-                                      </div>
-
-                                      <div class="col-12">
-                                        <label
-                                          for="description"
-                                          class="form-label"
-                                          >Description</label
-                                        >
-                                        <textarea
-                                          name="description"
-                                          placeholder="<%= item.description %>"
-                                          id="description"
-                                          class="form-control"
-                                          cols="30"
-                                          rows="4"
-                                          autocomplete="off"
-                                        ></textarea>
-                                      </div>
-
-                                      <div class="col-12">
-                                        <label
-                                          for="Ingredients"
-                                          class="form-label"
-                                          >Ingredients</label
-                                        >
-                                        <input
-                                          type="text"
-                                          name="ingredients"
-                                          id="ingredients"
-                                          class="form-control"
-                                          value="<%= item.ingredients%>"
-                                          autocomplete="off"
-                                        />
-                                      </div>
-
-                                      <div class="col-12">
-                                        <label
-                                          for="instructions"
-                                          class="form-label"
-                                          >Instructions</label
-                                        >
-                                        <textarea
-                                          placeholder="<%= item.instructions %>"
-                                          name="instructions"
-                                          id="instructions"
-                                          class="form-control"
-                                          cols="30"
-                                          rows="4"
-                                        ></textarea>
-                                      </div>
-                                      <div class="col-12">
-                                        <label for="category">Category</label>
-                                        <select
-                                          class="form-select form-control"
-                                          name="category"
-                                          aria-label="Category"
-                                          value="<%= item.category %>"
-                                        >
-                                          <option selected>
-                                            <%= item.category %>
-                                          </option>
-                                          <option value="Thai">Thai</option>
-                                          <option value="American">
-                                            American
-                                          </option>
-                                          <option value="Chineese">
-                                            Chineese
-                                          </option>
-                                          <option value="Mexican">
-                                            Mexican
-                                          </option>
-                                          <option value="Indian">Indian</option>
-                                          <option value="Indian">
-                                            Italian
-                                          </option>
-                                        </select>
-                                      </div>
-                                      <div class="col-12">
-                                        <label for="image">Image</label>
-                                        <div class="col-md-2">
-                                          <img
-                                            src="/uploads/<%= item.image %>"
-                                            alt="image"
-                                            loading="lazy"
-                                            width="80px"
-                                            height="80px"
-                                          />
-                                        </div>
-                                        <input
-                                          type="file"
-                                          class="form-control"
-                                          name="image"
-                                          accept="image/*"
-                                        />
-                                      </div>
-
-                                      <div class="col-12">
-                                        <button
-                                          type="submit"
-                                          class="btn btn-primary"
-                                          id="editsubmit"
-                                        >
-                                          Save
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <% }) %> <% } %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </td>
+          </tr>
+          <% }) %> <% } %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -236,8 +139,12 @@
 <script>
   function openEditModal(itemId) {
     const modal = document.getElementById(`editModal-${itemId}`);
-    modal.classList.add('show');
     modal.style.display = 'block';
+  }
+
+  function closeEditModal(itemId) {
+    const modal = document.getElementById(`editModal-${itemId}`);
+    modal.style.display = 'none';
   }
 
   function removeList(id) {
