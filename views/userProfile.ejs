@@ -1,13 +1,6 @@
 <div>
   <h1><%= user.name %></h1>
 
-  <div>
-    <div>
-      <label>Name</label>
-      <p><%= user.name %></p>
-    </div>
-  </div>
-
   <div id="mtable" style="display: block">
     <div id="Grid">
       <table>
@@ -80,20 +73,20 @@
                     </div>
 
                     <div>
-                      <label for="ingredients">Ingredients</label>
+                      <label for="price">Price</label>
                       <input
                         type="text"
-                        name="ingredients"
-                        value="<%= item.ingredients%>"
+                        name="price"
+                        value="<%= item.price%>"
                         autocomplete="off"
                       />
                     </div>
 
                     <div>
-                      <label for="instructions">Instructions</label>
+                      <label for="countInStock">Count in stock</label>
                       <textarea
-                        placeholder="<%= item.instructions %>"
-                        name="instructions"
+                        placeholder="<%= item.countInStock %>"
+                        name="countInStock"
                       ></textarea>
                     </div>
 
@@ -101,12 +94,12 @@
                       <label for="category">Category</label>
                       <select name="category" value="<%= item.category %>">
                         <option selected><%= item.category %></option>
-                        <option value="Thai">Thai</option>
-                        <option value="American">American</option>
-                        <option value="Chineese">Chineese</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="Indian">Indian</option>
-                        <option value="Italian">Italian</option>
+                        <option value="Shirts">Shirts</option>
+                        <option value="Pants">Pants</option>
+                        <option value="Hats">Hats</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Watches">Watches</option>
+                        <option value="Genji">Genji</option>
                       </select>
                     </div>
 

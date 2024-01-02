@@ -12,7 +12,7 @@ exports.homepage = async (req, res) => {
     let userId = await req.session.userId;
     let userName = await req.session.username;
 
-    const limitNumber = 5;
+    const limitNumber = 8;
     const latest = await Product.find({}).sort({ _id: -1 }).limit(limitNumber);
 
     const food = { latest };
@@ -45,7 +45,7 @@ exports.allProducts = async (req, res) => {
   }
 };
 
-//
+//to render submit-product page
 exports.submitProduct = async (req, res) => {
   try {
     const infoErrorsObj = req.flash('infoErrors');
@@ -56,6 +56,7 @@ exports.submitProduct = async (req, res) => {
   }
 };
 
+//submit product with details
 exports.submitProductPost = async (req, res) => {
   try {
     let imageUploadFile;
@@ -130,7 +131,6 @@ exports.signupPost = async (req, res) => {
       email,
       hash_password: hash_password,
       googleId, // Assign the generated Google ID
-      // ... other fields
     });
 
     await _user.save();
@@ -138,7 +138,7 @@ exports.signupPost = async (req, res) => {
     req.flash('infoSubmit', 'Registered Successfully');
     res.redirect('/signin');
   } catch (error) {
-    // Handle error appropriately, e.g., log it or redirect to an error page
+    // Handle error appropriately
     console.error(error);
     req.flash('infoErrors', 'Error occurred during signup');
     res.redirect('/signin');
@@ -243,11 +243,6 @@ exports.editProducts = async (req, res) => {
       if (err) return res.satus(500).send(err);
     });
   }
-
-  // if (req.body.ingredients) {
-  //   ingredientsArray = req.body.ingredients.split(',');
-  // }
-  // console.log(ingredientsArray);
 
   await Product.findByIdAndUpdate(
     { _id: ObjectId(product_id) },
